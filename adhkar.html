@@ -445,10 +445,14 @@ function switchTab(tab, el) {
 }
 
 function resetAll() {
-  if (!confirm('إعادة تعيين جميع الأذكار؟')) return;
   state = {}; saveState(); buildCards();
   updateProgress(currentTab);
   ['morning','evening','sleep'].forEach(t => document.getElementById('done_'+t).classList.remove('show'));
+  // Visual feedback
+  const btn = document.querySelector('.reset-btn');
+  btn.textContent = '✓ تمت الإعادة';
+  btn.style.color = 'var(--green-light)';
+  setTimeout(() => { btn.textContent = '↺ إعادة'; btn.style.color = ''; }, 1500);
 }
 
 loadState(); buildCards(); updateProgress('morning');
